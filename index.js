@@ -1,21 +1,29 @@
 const fs = require('fs');
-const { Client, Intents } = require("discord.js");
-const {token} = require("./config.json")
-// The Client and Intents are destructured from discord.js, since it exports an object by default. Read up on destructuring here https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
-const client = new Client({
-  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
-});
+const { Client, Intents, Collection } = require('discord.js');
+const { token } = require('./config.json');
 
-client.on("ready", () => {
-  console.log("I am ready!");
-});
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
-client.on("messageCreate", (message) => {
-  if (message.content.startsWith("ping")) {
-    message.channel.send("pong!");
-  }
-});
+const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 
-client.login("SuperSecretBotTokenHere");
+for (const file of eventFiles) {
+	const event = require(`./events/${file}`);
+	if (event.once) {
+		client.once(event.name, (...args) => event.execute(...args));
+	} else {
+		client.on(event.name, (...args) => event.execute(...args));
+	}
+}
+
+const wait = require('util').promisify(setTimeout);
+
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand()) return;
+	if (interaction.commandName === 'ping') {
+		await interaction.deferReply();
+		await wait(4000);
+		await interaction.editReply('Pong!');
+	}
+});
 
 client.login(token);
