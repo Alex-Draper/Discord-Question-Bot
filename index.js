@@ -1,6 +1,16 @@
 const fs = require('fs');
 const { Client, Collection, Intents } = require('discord.js');
-const { token } = require('./config.json');
+const { token, mongodbUsername, mongodbPassword, mongodbName,mongodbCollection } = require('./config.json');
+const { MongoClient } = require('mongodb');
+
+const uri = `mongodb+srv://${mongodbUsername}:${mongodbPassword}@cluster0.z5ix9.mongodb.net/${mongodbName}?retryWrites=true&w=majority`;
+const mongoClient = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoClient.connect(err => {
+  const collection = mongoClient.db(mongodbName).collection(mongodbCollection);
+  // perform actions on the collection object
+  console.log("connected to db");
+  mongoClient.close();
+});
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
