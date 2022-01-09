@@ -12,12 +12,28 @@ token = "OTI3OTcyNjA5MDEyOTI4NTEy.YdR_1g.6zMkvZ7wdaOs22F01LXg2jQGdIs"
 
 @slash.slash(
     name="add",
-    description="Add question(s) to top of list.\"Question One\" \"Question Two\"",
+    description="Add question(s) to top of list.",
     guild_ids=[845390667273338922],
     options=[
-        create_option(
-            name="option",
+            create_option(
+            name="list_location",
             description="Add to top of questions list?",
+            required=True,
+            option_type=3,
+            choices=[
+                create_choice(
+                    name="Top of List",
+                    value="Top of List"
+                ),
+                create_choice(
+                    name="Bottom of List",
+                    value="Bottom of List"
+                ),
+            ]
+        ),
+        create_option(
+            name="questions",
+            description="\"Question One\" \"Question Two\"",
             required=True,
             option_type=3,
         )
