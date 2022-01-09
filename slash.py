@@ -39,8 +39,8 @@ token = "OTI3OTcyNjA5MDEyOTI4NTEy.YdR_1g.6zMkvZ7wdaOs22F01LXg2jQGdIs"
         )
     ]
 )
-async def _add(ctx:SlashContext, option:str):
-    await ctx.send(option)
+async def _add(ctx:SlashContext, list_location:str,questions:str):
+    await ctx.send(list_location + questions)
 
 # @slash.slash(
 #     name="add",
