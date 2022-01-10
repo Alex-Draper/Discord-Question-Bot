@@ -13,5 +13,5 @@
 
 <br>
 
-```node deploy-commands.js```
+```node deploy-commands.js```<br>
 ```node index.js```
