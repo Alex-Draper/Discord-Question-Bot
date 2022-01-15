@@ -9,7 +9,7 @@ class DiscordQuestion:
 
     """
 
-    def __init__(self, questionText : str, user : str, creationDate : datetime = datetime.now(), used: bool = False):
+    def __init__(self, questionText : str, user : str, creationDate : datetime = datetime.now(), used: bool = False, priority : int = 0):
         """
 
         Args:
@@ -22,6 +22,7 @@ class DiscordQuestion:
         self.setUser(user)
         self.setCreationDate(creationDate)
         self.setUsed(used)
+        self.setPriority(priority)
     
     def setQuestionText(self, questionText : str) -> str:
         if not isinstance(questionText, str):
@@ -55,9 +56,22 @@ class DiscordQuestion:
     def getUsed(self) -> bool:
         return self._used
 
+    def setPriority(self, priority : int) -> None:
+        if not isinstance(priority, int):
+            raise TypeError("priority must be type int")
+        self._priority = priority
+
+    def getPriority(self) -> int:
+        return self._priority
+
 
     def __str__(self):
-     return f"Discord Question - questionText:{self.getQuestionText()}, user:{self.getUser()}, creationDate:{self.getCreationDate()}, used: {self.getUsed}"
+     return f""""Discord Question - 
+     questionText:{self.getQuestionText()}, 
+     user:{self.getUser()}, 
+     creationDate:{self.getCreationDate()}, 
+     used: {self.getUsed()},
+     priority: {self.getPriority()}"""
 
     def getAsDict(self) -> dict:
         """Returns a dictionary representation of the question
@@ -69,6 +83,7 @@ class DiscordQuestion:
             "questionText" : self.getQuestionText(),
             "user" : self.getUser(),
             "creationDate" : self.getCreationDate(),
-            "used" : self.getUsed()
+            "used" : self.getUsed(),
+            "priority" : self.getPriority()
         }
         return dictToReturn
