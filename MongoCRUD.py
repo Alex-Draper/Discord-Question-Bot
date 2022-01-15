@@ -10,16 +10,16 @@ class MongoCRUD:
         self.db = self.client["discordDB"]
         self.collection = self.db["questions"]
 
-    def createPost(self, items: dict):
+    def _createPost(self, items: dict):
         self.collection.insert_one(items)
 
-    def readPost(self, filters: dict):
+    def _readPost(self, filters: dict):
         self.collection.find_one(filters)
 
-    def updatePost(self, filter, update):
+    def _updatePost(self, filter, update):
         self.collection.update_one(filter, update)
 
-    def deletePost(self, collectionToDelete):
+    def _deletePost(self, collectionToDelete):
         self.collection.delete_one(collectionToDelete)
 
 
