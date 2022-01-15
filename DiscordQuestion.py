@@ -4,8 +4,20 @@ from typing import Type
 
 
 class DiscordQuestion:
+    """[Class to help form questions to be added to the DB. Simply create a new instance for each question. 
+    Fields can be updated after creation]
+
+    """
 
     def __init__(self, questionText : str, user : str, creationDate : datetime = datetime.now(), used: bool = False):
+        """
+
+        Args:
+            questionText (str): The question to be asked
+            user (str): The user who added the question
+            creationDate (datetime, optional): The date and time the question was added. Defaults to datetime.now().
+            used (bool, optional): Flag for if the question has already been asked. Defaults to False.
+        """
         self.setQuestionText(questionText)
         self.setUser(user)
         self.setCreationDate(creationDate)
@@ -48,6 +60,11 @@ class DiscordQuestion:
      return f"Discord Question - questionText:{self.getQuestionText()}, user:{self.getUser()}, creationDate:{self.getCreationDate()}, used: {self.getUsed}"
 
     def getAsDict(self) -> dict:
+        """Returns a dictionary representation of the question
+
+        Returns:
+            dict: The dict representation of the question
+        """
         dictToReturn : dict = {
             "questionText" : self.getQuestionText(),
             "user" : self.getUser(),
