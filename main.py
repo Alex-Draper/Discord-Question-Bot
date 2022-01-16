@@ -45,10 +45,7 @@ token = "OTI3OTcyNjA5MDEyOTI4NTEy.YdR_1g.6zMkvZ7wdaOs22F01LXg2jQGdIs"
     ]
 )
 async def _add(ctx:SlashContext, list_location:str,questions:str):
-    # await ctx.message.add_reaction(":thumbsup")
-    await ctx.send("Adding questions...")
-    # await ctx.deferred
-    # await ctx.defer
+    message = await ctx.send("Adding questions...")
     temp = [line for line in [line.strip() for line in questions.split("\"")] if line]
     mon = MongoCRUD()
     for i in temp:
@@ -57,7 +54,6 @@ async def _add(ctx:SlashContext, list_location:str,questions:str):
         else:
             dq = DiscordQuestion(i, str(ctx.author), priority=0)
         mon.addOneQuestionToDB(dq.getAsDict())
-    # await ctx.message.edit("Questions added, "+str(ctx.author) +" <3")
-    await ctx.send("Questions added, "+str(ctx.author) +" <3")
+    await message.edit(content="Questions added, "+str(ctx.author) +" <3")
     
 client.run(token)
