@@ -55,5 +55,23 @@ async def _add(ctx:SlashContext, list_location:str,questions:str):
             dq = DiscordQuestion(i, str(ctx.author), priority=0)
         mon.addOneQuestionToDB(dq.getAsDict())
     await message.edit(content="Question(s) added, "+str(ctx.author) +" <3")
+
+
+@slash.slash(
+    name="channel",
+    description="Specify which channel to post daily questions to.",
+    guild_ids=[845390667273338922],
+    options=[
+        create_option(
+            name="channel",
+            description="Specify which channel to post daily questions to.",
+            required=True,
+            option_type=7,
+        )
+    ]
+)
+async def _channel(ctx:SlashContext, channel):
+    await ctx.send(str(channel))
+
     
 client.run(token)
