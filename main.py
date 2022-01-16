@@ -45,52 +45,19 @@ token = "OTI3OTcyNjA5MDEyOTI4NTEy.YdR_1g.6zMkvZ7wdaOs22F01LXg2jQGdIs"
     ]
 )
 async def _add(ctx:SlashContext, list_location:str,questions:str):
-    await ctx.send("Questions added, "+str(ctx.author) +" <3")
-    print(ctx.author)
+    # await ctx.message.add_reaction(":thumbsup")
+    await ctx.send("Adding questions...")
+    # await ctx.deferred
+    # await ctx.defer
     temp = [line for line in [line.strip() for line in questions.split("\"")] if line]
     mon = MongoCRUD()
-    print(ctx.author)
     for i in temp:
         if list_location == "Top of List":
             dq = DiscordQuestion(i, str(ctx.author), priority=1)
         else:
             dq = DiscordQuestion(i, str(ctx.author), priority=0)
         mon.addOneQuestionToDB(dq.getAsDict())
-    print(ctx.author)
-    # await ctx.send("Questions added, "+str(ctx.author) +" <3")
+    # await ctx.message.edit("Questions added, "+str(ctx.author) +" <3")
+    await ctx.send("Questions added, "+str(ctx.author) +" <3")
     
-# @tasks.loop(seconds=2)
-# async def loopThing():
-#     channel = client.get_channel(845390668025298956)
-#     if channel != None:
-#         await channel.send('hello')
-    
-# loopThing.start()
 client.run(token)
-
-# @slash.slash(
-#     name="add",
-#     description="Add question(s) to top of list.\"Question One?\" \"Question Two?\"",
-#     guild_ids=[845390667273338922],
-#     options=[
-#         create_option(
-#             name="option",
-#             description="Add to top of questions list?",
-#             required=True,
-#             option_type=3,
-#             choices=[
-#                 create_choice(
-#                     name="True",
-#                     value="True"
-#                 ),
-#                 create_choice(
-#                     name="False",
-#                     value="False"
-#                 ),
-#             ]
-#         )
-#     ]
-# )
-# async def _add(ctx:SlashContext, option:str):
-#     await ctx.send(option)
-
