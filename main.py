@@ -1,3 +1,4 @@
+from pydoc import cli
 from random import choices
 from typing_extensions import Required
 import discord
@@ -12,6 +13,9 @@ from DiscordQuestion import DiscordQuestion
 import asyncio
 
 client = commands.Bot(command_prefix="!")
+@client.event
+async def on_ready():
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="you 👀"))
 slash = SlashCommand(client, sync_commands=True)
 token = "OTI3OTcyNjA5MDEyOTI4NTEy.YdR_1g.6zMkvZ7wdaOs22F01LXg2jQGdIs"
 
