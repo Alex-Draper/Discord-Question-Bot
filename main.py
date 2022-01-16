@@ -54,6 +54,6 @@ async def _add(ctx:SlashContext, list_location:str,questions:str):
         else:
             dq = DiscordQuestion(i, str(ctx.author), priority=0)
         mon.addOneQuestionToDB(dq.getAsDict())
-    await message.edit(content="Questions added, "+str(ctx.author) +" <3")
+    await message.edit(content="Question(s) added, "+str(ctx.author) +" <3")
     
 client.run(token)
