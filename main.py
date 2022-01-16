@@ -64,7 +64,7 @@ async def _add(ctx:SlashContext, list_location:str,questions:str):
     options=[
         create_option(
             name="select_channel",
-            description="Specify which channel to post daily questions to.",
+            description="Specify which channel(s) to post daily questions to.",
             required=True,
             option_type=7,
         )
