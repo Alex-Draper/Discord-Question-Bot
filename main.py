@@ -44,13 +44,13 @@ token = "OTI3OTcyNjA5MDEyOTI4NTEy.YdR_1g.6zMkvZ7wdaOs22F01LXg2jQGdIs"
 async def _add(ctx:SlashContext, list_location:str,questions:str):
     await ctx.send(list_location + questions)
     
-@tasks.loop(seconds=2)
-async def loopThing():
-    channel = client.get_channel(845390668025298956)
-    if channel != None:
-        await channel.send('hello')
+# @tasks.loop(seconds=2)
+# async def loopThing():
+#     channel = client.get_channel(845390668025298956)
+#     if channel != None:
+#         await channel.send('hello')
     
-loopThing.start()
+# loopThing.start()
 client.run(token)
 
 # @slash.slash(
