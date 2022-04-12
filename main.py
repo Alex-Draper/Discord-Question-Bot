@@ -1,3 +1,4 @@
+from decouple import config
 from pydoc import cli
 from random import choices
 from typing_extensions import Required
@@ -17,7 +18,7 @@ client = commands.Bot(command_prefix="!")
 async def on_ready():
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="you 👀"))
 slash = SlashCommand(client, sync_commands=True)
-token = ""
+token = config("DISCORD_TOKEN")
 
 @slash.slash(
     name="add",

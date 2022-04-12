@@ -1,3 +1,5 @@
+from decouple import config
+from distutils.command.config import config
 from DiscordQuestion import DiscordQuestion
 from datetime import datetime
 import certifi
@@ -15,7 +17,7 @@ class NoNewQuestionAvailableException(Exception):
 
 class MongoCRUD:
     def __init__(self):
-        self._connectionString = ""
+        self._connectionString = config("MONGO_CONNECTION_STRING")
         self.client = MongoClient(self._connectionString, tlsCAFile=certifi.where())
         self.db = self.client["discordDB"]
         self.collection = self.db["questions"]
