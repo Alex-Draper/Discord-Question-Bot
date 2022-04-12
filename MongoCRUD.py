@@ -15,7 +15,7 @@ class NoNewQuestionAvailableException(Exception):
 
 class MongoCRUD:
     def __init__(self):
-        self._connectionString = "mongodb+srv://admin:7pbKRmqoSyVmQTpXrEtdmo7xO@cluster0.z5ix9.mongodb.net/discordDB?retryWrites=true&w=majority"
+        self._connectionString = ""
         self.client = MongoClient(self._connectionString, tlsCAFile=certifi.where())
         self.db = self.client["discordDB"]
         self.collection = self.db["questions"]
@@ -114,20 +114,19 @@ class MongoCRUD:
 #     # mon.addOneQuestionToDB(dq.getAsDict())
 #     # a = mon.getNextPriorityOneQuestion()
 #     # a = mon.getNextNonPriorityQuestion()
-#     a = mon.getNextQuestion()
-#     print(a)
-
+#     # a = mon.getNextQuestion()
+#     # print(a)
 
 #     dq2 = DiscordQuestion("What is your fav animal?", "Serval")
 #     dq3 = DiscordQuestion("What is the best place in the world?", "Father CEO")
 
 #     mon.addManyQuestionsToDB([dq2.getAsDict(), dq3.getAsDict()])
-    # mon.createPost(
-    #     {
-    #         "questionText": "What is your fav animal",
-    #         "creationDate": datetime.today().replace(microsecond=0),
-    #         "user" : "PerryBot",
-    #         "used": False
-    #     }
-    # )
+#     mon._createPost(
+#         {
+#             "questionText": "What is your fav animal",
+#             "creationDate": datetime.today().replace(microsecond=0),
+#             "user" : "PerryBot",
+#             "used": False
+#         }
+#     )
     

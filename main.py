@@ -17,7 +17,7 @@ client = commands.Bot(command_prefix="!")
 async def on_ready():
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="you 👀"))
 slash = SlashCommand(client, sync_commands=True)
-token = "OTI3OTcyNjA5MDEyOTI4NTEy.YdR_1g.6zMkvZ7wdaOs22F01LXg2jQGdIs"
+token = ""
 
 @slash.slash(
     name="add",
@@ -78,6 +78,16 @@ async def _channel(ctx:SlashContext, select_channel):
     channel = discord.utils.get(ctx.guild.channels, name=str(select_channel))
     channel_id = channel.id
     await ctx.send(str(channel_id))
-
     
+@tasks.loop(seconds=2)
+async def my_background_task():
+    """A background task that gets invoked every 10 minutes."""
+    channel = client.get_channel(845390668025298956) # Get the channel, the id has to be an int
+    await channel.send('TEST!')
+    
+@my_background_task.before_loop
+async def my_background_task_before_loop():
+    await client.wait_until_ready()
+
+my_background_task.start()
 client.run(token)
